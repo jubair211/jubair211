@@ -17,15 +17,23 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate badges from GitHub API
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          COMMITS=$(curl -s "https://api.github.com/search/commits?q=author:jubair211" -H "Accept: application/vnd.github.cloak-preview" | python3 -c "import sys,json; print(json.load(sys.stdin)['total_count'])")
+          COMMITS=$(curl -s -H "Authorization: token $GH_TOKEN" \
+            "https://api.github.com/search/commits?q=author:jubair211" \
+            -H "Accept: application/vnd.github.cloak-preview" | \
+            python3 -c "import sys,json; print(json.load(sys.stdin)['total_count'])")
 
           TODAY=$(date +%Y-%m-%d)
           STREAK=0
 
           for i in $(seq 0 30); do
             CHECK_DATE=$(date -d "$TODAY - $i days" +%Y-%m-%d)
-            ACTIVITY=$(curl -s "https://api.github.com/search/commits?q=author:jubair211+committer-date:$CHECK_DATE" -H "Accept: application/vnd.github.cloak-preview" | python3 -c "import sys,json; print(json.load(sys.stdin)['total_count'])")
+            ACTIVITY=$(curl -s -H "Authorization: token $GH_TOKEN" \
+              "https://api.github.com/search/commits?q=author:jubair211+committer-date:$CHECK_DATE" \
+              -H "Accept: application/vnd.github.cloak-preview" | \
+              python3 -c "import sys,json; print(json.load(sys.stdin)['total_count'])")
             if [ "$ACTIVITY" -gt "0" ]; then
               STREAK=$((STREAK + 1))
             else
