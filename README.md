@@ -1,6 +1,6 @@
 ### Hi there 👋 I am Jubair
 
-![GitGrade Streak](https://img.shields.io/badge/streak-1%20days-f59e0b?style=flat&logo=git&logoColor=white)
+![GitGrade Streak](https://img.shields.io/badge/streak-0%20days-f59e0b?style=flat&logo=git&logoColor=white)
 ![GitGrade Commits](https://img.shields.io/badge/commits-215-00d4aa?style=flat&logo=git&logoColor=white)
 ![GitGrade Style](https://img.shields.io/badge/style-night+coder-00d4aa?style=flat&logo=git&logoColor=white)
 
